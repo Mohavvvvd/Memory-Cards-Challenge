@@ -1,6 +1,7 @@
 const img = ['a', 'b', 'c', 'd', 'e', 'f', 'j', 'k'];
 const imgTwice = img.concat(img);
-
+const music = document.getElementById('music');
+let compt = 0 ;
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -11,6 +12,9 @@ function shuffle(array) {
 
 function startFlip() {
     let cards = document.querySelectorAll('.flip-card');
+    music.pause();
+    music.currentTime = 0 ;
+    compt = 0;
     let shuffledImg = shuffle(imgTwice);
     cards.forEach(function(card) {
         card.classList.remove('flipped');
@@ -29,7 +33,6 @@ function startFlip() {
 }
 
 let flippedCards = [];
-let compt = 0 ;
 function flipCard(card) {
     if (!card.classList.contains('flipped') && flippedCards.length < 2) {
         card.classList.add('flipped');
@@ -61,10 +64,6 @@ function flipCard(card) {
         flippedCards.push(card);
     }
     if (compt == 8 ) {
-        playMusic();
+        music.play();
     }
-}
-function playMusic() {
-    const music = document.getElementById('music');
-    music.play();
 }
